@@ -6,9 +6,9 @@ the chatbot's response, and a message indicating that no source documents are av
 running this module directly.
 """
 
-from flask import Flask, request, jsonify
-import langchain
+from flask import Flask, request
 from model import qa_bot, final_result
+from ingest import create_vector_db
 
 app = Flask(__name__)
 
@@ -25,15 +25,15 @@ def chat():
     response["source_documents"] = "No source documents available"
     return response
 
-@app.route('/injest', methods=['POST'])
+
+@app.route('/ingest', methods=['POST'])
 def injest():
     req = request.get_json()
     inputPath = req['inputPath']
     outputPath = req['outputPath']
-    print('Creating vector db using docs in path: ',inputPath)
+    print('Creating vector db using docs in path: ', inputPath)
     create_vector_db(inputPath, outputPath)
-    print('Vector db indexes generated in: ',outputPath)
-
+    print('Vector db indexes generated in: ', outputPath)
 
 
 if __name__ == '__main__':
