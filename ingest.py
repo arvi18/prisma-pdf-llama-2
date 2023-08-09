@@ -7,8 +7,8 @@ DATA_PATH = 'data/'
 DB_FAISS_PATH = 'vectorstore/db_faiss'
 
 # Create vector database
-def create_vector_db():
-    loader = DirectoryLoader(DATA_PATH,
+def create_vector_db(inputPath, outputPath):
+    loader = DirectoryLoader(inputPath,
                              glob='*.pdf',
                              loader_cls=PyPDFLoader)
 
@@ -21,7 +21,7 @@ def create_vector_db():
                                        model_kwargs={'device': 'cpu'})
 
     db = FAISS.from_documents(texts, embeddings)
-    db.save_local(DB_FAISS_PATH)
+    db.save_local(outputPath)
 
 if __name__ == "__main__":
     create_vector_db()
