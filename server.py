@@ -25,6 +25,16 @@ def chat():
     response["source_documents"] = "No source documents available"
     return response
 
+@app.route('/injest', methods=['POST'])
+def injest():
+    req = request.get_json()
+    inputPath = req['inputPath']
+    outputPath = req['outputPath']
+    print('Creating vector db using docs in path: ',inputPath)
+    create_vector_db(inputPath, outputPath)
+    print('Vector db indexes generated in: ',outputPath)
+
+
 
 if __name__ == '__main__':
     app.run()
