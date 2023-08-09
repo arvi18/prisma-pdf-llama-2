@@ -17,12 +17,8 @@ def chat():
     # return jsonify({'response': response})
     return response
 
-
 if __name__ == '__main__':
     app.run()
-
-# greet on / route
-
 
 @app.route('/')
 def index():
