@@ -34,6 +34,7 @@ def injest():
     print('Creating vector db using docs in path: ', inputPath)
     create_vector_db(inputPath, outputPath)
     print('Vector db indexes generated in: ', outputPath)
+    return {'message': 'success', 'description': 'Vector database indexes successfully generated in output path.', 'outputPath': outputPath}
 
 
 if __name__ == '__main__':
